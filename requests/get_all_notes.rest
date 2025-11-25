@@ -1,0 +1,2 @@
+//This is REST send client request use this instead of postman, Extension from VS code
+GET http://localhost:3001/api/notes
