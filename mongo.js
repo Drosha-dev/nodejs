@@ -18,17 +18,23 @@ mongoose.connect(url, {family: 4})
 // dictates how notes are stored
 const noteSchema = new mongoose.Schema({
     content: String,
-    imporant: Boolean
+    important: Boolean
 })
 
 const Note = mongoose.model('Note', noteSchema)
 
-const note = new Note({
-    content: 'HTML is Easy',
-    imporant: true
-})
 
-note.save().then(result => {
-    console.log('note saved!')
-    mongoose.connection.close();
+Note.find({imporant: true}).then(result => {
+    result.forEach(note => {
+        console.log(note);
+    })
+    mongoose.connection.close()
 })
+// const note = new Note({
+//     content: 'Bananas are not Apples',
+//     imporant: true
+// })
+// note.save().then(result => {
+//     console.log('note saved!')
+//     mongoose.connection.close();
+// })
