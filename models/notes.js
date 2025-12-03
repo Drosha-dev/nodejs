@@ -10,11 +10,15 @@ mongoose.connect(url, {family: 4}).then(result => {
   console.log('connected to MongoDB');
 }).catch(error => {
     console.log('error connecting to MongoDB', error.message);
-    
 })
 
 const noteSchema = new mongoose.Schema({
-    content: String,
+    // can also add validation here from mongoose
+    content: {
+        type: String,
+        minlength: 5,
+        required: true
+    },
     important: Boolean
 })
 // Transforming the returned object to modify _id to id and removing __v
