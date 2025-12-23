@@ -50,7 +50,9 @@ describe('when there is initially some notes saved', () => {
     test('fails with statuscode 404 if note does not exist', async () => {
       const validNonexistingId = await helper.nonExisitingId()
 
-      await api.get(`/api/notes/${validNonexistingId}`).expect(404)
+      await api
+        .get(`/api/notes/${validNonexistingId}`)
+        .expect(404)
     })
 
     test('fails with statuscode 400 id is invalid', async () => {
@@ -83,7 +85,10 @@ describe('when there is initially some notes saved', () => {
     test('fails with status code 400 if data invalid', async () => {
       const newNote = { important: true }
 
-      await api.post('/api/notes').send(newNote).expect(400)
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(400)
 
       const notesAtEnd = await helper.notesInDb()
 
@@ -96,7 +101,9 @@ describe('when there is initially some notes saved', () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
 
-      await api.delete(`/api/notes/${noteToDelete.id}`).expect(204)
+      await api
+        .delete(`/api/notes/${noteToDelete.id}`)
+        .expect(204)
 
       const notesAtEnd = await helper.notesInDb()
 
